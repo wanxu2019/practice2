@@ -43,7 +43,7 @@
 
 
     <a style="display:none" class="btn" href="/SIPOC/">返回列表</a>
-    <a class="btn file" id="downloadModelFile" href="../template/template.xls"><i class="icon-search icon-white"></i>下载模板文件</a>
+    <a class="btn file" id="downloadModelFile" href="../template/sipoc_template.xls"><i class="icon-search icon-white"></i>下载模板文件</a>
     <a class="btn file" id="readFromFile">从文件导入<input id="xlf" type="file" name="xlfile"/></a>
     <div id="home" class="tab-pane active">
         <div class="row">

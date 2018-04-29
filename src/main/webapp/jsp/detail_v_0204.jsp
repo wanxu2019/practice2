@@ -99,7 +99,7 @@
             <!--主功能区-->
             <div class="tab-pane" id="mainFunctionDiv">
                 <div id="mainBtnGroup" class="btn-group btn-group-sm">
-                    <a type="button" class="btn btn-default btn-success" id="downloadModelFile" href="../template/template.xls">
+                    <a type="button" class="btn btn-default btn-success" id="downloadModelFile" href="../template/sipoc_template.xls">
                         <span class="menu-icon fa fa-download"></span>下载模板
                     </a>
 

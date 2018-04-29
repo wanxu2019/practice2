@@ -51,7 +51,7 @@
 	<p>
 		<div class="btn-group" style="backgrond-color:#FF0000" >
 		<a style="display:none" class="btn btn-info" href="/SIPOC/">&nbsp返回列表</a>
-   		<a class="btn btn-info file" id="downloadModelFile" href="../template/template.xls"><i class="icon-search icon-white"></i>&nbsp下载模板</a>
+   		<a class="btn btn-info file" id="downloadModelFile" href="../template/sipoc_template.xls"><i class="icon-search icon-white"></i>&nbsp下载模板</a>
    		<a class="btn btn-info file" id="readFromFile"><i class="icon-file icon-white"></i>&nbsp文件导入<input id="xlf" type="file" name="xlfile"/></a>
         <button class="btn btn-info" id="btnSaveToFile"><i class="icon-download icon-white"></i>&nbsp保存文件</button>
         <button class="btn btn-info" id="btnSaveAsPicture"><i class="icon-print icon-white"></i>&nbsp保存图片</button>

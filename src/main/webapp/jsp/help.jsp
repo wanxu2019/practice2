@@ -77,7 +77,7 @@
 	1.本Web-App为在线SIPOC图表快速生成工具，推荐在PC端使用；
 	</p>
 	<p>
-	2.推荐使用模板完成SIPOC图表创建，根据提示修改模板内容，导入本Web-App,通过保存图片按钮即可生成导出为图片，获取模板请点击<a href="../template/template.xls">模板</a>；
+	2.推荐使用模板完成SIPOC图表创建，根据提示修改模板内容，导入本Web-App,通过保存图片按钮即可生成导出为图片，获取模板请点击<a href="../template/sipoc_template.xls">模板</a>；
 	</p>
 	<p>
 	3.所有SIPOC图表可以通过保存文件按钮，保存为Excel文件；

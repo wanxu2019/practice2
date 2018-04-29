@@ -243,7 +243,7 @@ function displayData(data) {
             //添加格子
             var index = addC();
             //填充数据
-            $("#sipoc_input_c" + index).val(row["C"]);
+            $("#sipoc_input_c_" + index).val(row["C"]);
         }
     }
 }
