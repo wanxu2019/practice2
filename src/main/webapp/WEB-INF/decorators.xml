@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<decorators defaultdir="/decorators">
+    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
+    <excludes>
+        <pattern>/nodecorate/*</pattern>
+        <pattern>/styles/*</pattern>
+        <pattern>/scripts/*</pattern>
+        <pattern>/images/*</pattern>
+        <pattern>/dojo/*</pattern>
+        <pattern>/struts/*</pattern>
+        <pattern>/appstyle*</pattern>
+        <pattern>/html/*</pattern>
+        <pattern>/css/*</pattern>
+        <pattern>/js/*</pattern>
+    </excludes>
+
+    <decorator name="default" page="bannerAndFoot.jsp">
+    <!--<decorator name="default" page="frame.jsp">-->
+    <!--<decorator name="default" page="copyright.jsp">-->
+        <pattern>/*</pattern>
+    </decorator>
+
+</decorators>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro Configuration</description>
+
+    <!-- Base DAO -->
+    <bean id="genericDao">
+        <property name="mysql1SessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <!-- Service -->
+    <!--<bean id="permissionService" class="xjtu.service.PermissionService">-->
+        <!--<property name="permissionDao" ref="permissionDao"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="roleService" class="xjtu.service.RoleServiceImpl">-->
+        <!--<property name="roleDao" ref="roleDao"/>-->
+    <!--</bean>-->
+
+    <bean id="randomNumberGenerator" class="org.apache.shiro.crypto.SecureRandomNumberGenerator"/>
+
+    <bean id="passwordHelper" class="xjtu.util.PasswordHelper">
+        <property name="randomNumberGenerator" ref="randomNumberGenerator"/>
+        <property name="algorithmName" value="md5"/>
+        <property name="hashIterations" value="2"/>
+    </bean>
+
+	<!-- 用户授权信息Cache -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <!--认证实现类-->
+    <bean id="casRealm" class="xjtu.security.MyCasRealm">
+        <property name="cachingEnabled" value="true"/>
+        <property name="authenticationCachingEnabled" value="true"/>
+        <property name="authenticationCacheName" value="authenticationCache"/>
+        <property name="authorizationCachingEnabled" value="true"/>
+        <property name="authorizationCacheName" value="authorizationCache"/>
+        <property name="casServerUrlPrefix" value="https://${casBaseUrl}${casUrl}"/>
+        <property name="casService" value="http://${appBaseUrl}${appUrl}/cas"/>
+    </bean>
+
+
+    <!-- Shiro's main business-tier object for web-enabled applications -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="casRealm" />
+        <!--<property name="cacheManager" ref="cacheManager" />-->
+    </bean>
+
+    <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
+        <property name="failureUrl" value="/casFailure"/>
+    </bean>
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter">
+        <property name="redirectUrl" value="https://${casBaseUrl}${casUrl}/logout?service=http://${appBaseUrl}${appUrl}/&amp;locale=zh_CN"/>
+    </bean>
+
+	<!-- Shiro Filter -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<!--<property name="loginUrl" value="/login" />-->
+        <property name="loginUrl" value="https://${casBaseUrl}${casUrl}/login?service=http://${appBaseUrl}${appUrl}/cas&amp;locale=zh_CN" />
+		<property name="successUrl" value="/index" />
+        <property name="filters">
+            <util:map>
+                <entry key="cas" value-ref="casFilter"/>
+                <entry key="logout" value-ref="logoutFilter"/>
+            </util:map>
+        </property>
+		<property name="filterChainDefinitions">
+			<value>
+                /ace=anon
+                /detail/**=anon
+                /test=anon
+                /doRegister=anon
+                /casFailure=anon
+                /static/**=anon
+                /casLogin=anon
+                /api/**=anon
+                /cas = cas
+                /logout = logout
+				/** = user
+		 	</value>
+		</property>
+	</bean>
+
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+</beans>

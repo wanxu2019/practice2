@@ -1,0 +1,17 @@
+1.jdk导入公钥证书：优先采用自动方式，若失败则采用手动方式。
+
+自动方式：
+以管理员方式打开命令行，通过cd命令进入当前文件夹下，
+然后在该文件夹下运行：import-cert.bat
+
+手动方式：
+（1）将xjtucadcam.cer文件拷贝至%JAVA_HOME%\jre\lib\security中。
+（2）删除%JAVA_HOME%\jre\lib\security中的cacerts文件。
+（3）在%JAVA_HOME%\jre\lib\security处打开命令行，执行以下命令：  
+keytool -import -alias xjtucadcam -file xjtucadcam.cer -noprompt -trustcacerts -storetype jks -keystore cacerts -storepass xjtucadcam
+（4）命令执行成功后会提示证书已导入。
+
+2.修改hosts文件
+（1）以文本方式打开C:\Windows\System32\drivers\etc中的hosts文件。
+（2）在文件末尾加上115.154.191.25 innovation.xjtu.edu.cn，保存退出。
+（3）在25服务器不能使用时，可先用115.154.191.5 innovation.xjtu.edu.cn代替。

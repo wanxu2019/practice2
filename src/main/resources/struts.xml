@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.action.excludePattern" value="/(static|css|js|html)/.*?"/>
+    <!--<constant name="struts.action.excludePattern" value="/static/.*?"/>-->
+    <constant name="struts.enable. " value="false"/>
+
+    <package name="default" extends="struts-default">
+
+        <default-action-ref name="" />
+
+        <action name="appstyle">
+            <result name="success">appstyle.html</result>
+        </action>
+
+        <action name="" class="xjtu.web.action.DetailAction" method="index">
+            <result>/jsp/detail.jsp</result>
+        </action>
+
+        <action name="ace">
+            <result>/web-resources/demo.html</result>
+        </action>
+
+        <action name="test">
+            <result>/jsp/test.jsp</result>
+        </action>
+
+        <action name="casFailure">
+            <result>/jsp/failure.jsp</result>
+        </action>
+
+        <action name="register" class="xjtu.web.action.RegisterAction">
+        	<result >/jsp/register.jsp</result>
+        </action>
+
+        <action name="casLogin">
+        	<result type="redirect">https://localhost:8443/chapter15-server/login?service=https://localhost:9443/InnovationToolsPlatform/cas&amp;locale=zh_CN</result>
+        </action>
+
+        <action name="doRegister" class="xjtu.web.action.RegisterAction" method="register">
+        	<result name="input" type="redirectAction">register</result>
+        	<result type="redirectAction">index</result>
+        </action>
+    </package>
+
+    <include file="struts-config/api.xml"/>
+    <include file="struts-config/detail.xml"/>
+</struts>

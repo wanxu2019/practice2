@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+	  <title>创新方法工作平台</title>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	  <meta name="description" content="overview &amp; stats"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	  <!--前台css和js-->
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/css/bootstrap.min.css"/>
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/css/ace.min.css"/>
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/font-awesome/4.5.0/css/font-awesome.min.css"/>
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/css/ace-rtl.min.css"/>
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/css/ace-skins.min.css"/>
+	  <link rel="stylesheet" href="/webresources/ace-master/assets/css/fonts.googleapis.com.css"/>
+	  <link rel="stylesheet" href="css/Extra.css"/>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/ace-extra.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery-2.1.4.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/ace.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/bootstrap.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery.dataTables.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery.dataTables.bootstrap.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery-ui.custom.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery.ui.touch-punch.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/ace-elements.min.js"></script>
+	  <script type="text/javascript" src="/webresources/ace-master/assets/js/jquery.mobile.custom.min.js"></script>
+	  <script type="text/javascript" src="/webresources/common/js/userLogin.js"></script>
+	  <!--获取服务器页面样式-->
+	  <link rel="import" id="frame" href="/webresources/common/html/appFrame.html">
+	  <link rel="import" id="local" href="html/localHtml.html">
+
+    <script src="../static/dependencies/excel/cpexcel.js"></script>
+    <script src="../static/dependencies/excel/shim.js"></script>
+    <script src="../static/dependencies/excel/jszip.js"></script>
+    <script src="../static/dependencies/excel/xlsx.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    <!-- FileSaver.js is the library of choice for Chrome -->
+    <script type="text/javascript" src="../static/dependencies/excel/Blob.js"></script>
+    <script type="text/javascript" src="../static/dependencies/excel/FileSaver.js"></script>
+    <script type="text/javascript" src="../static/dependencies/dom-to-image.js"></script>
+    <script src="../static/js/detail.js"></script>
+    <style>
+        .file {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            text-decoration: none;
+            text-indent: 0;
+            line-height: 20px;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;//不透明度
+        }
+        .file:hover {
+            text-decoration: none;
+        }
+        table input{
+            width:75%;
+        }
+        .main-content{
+            margin-left: 0px;
+        }
+        div {
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+    </style>
+</head>
+<body class="no-skin">
+<!--嵌入导航栏-->
+<div id="navbarDiv" class="navbar navbar-default"></div>
+<div class="main-container ace-save-state" id="main-container">
+	  <!--嵌入侧边栏-->
+	  <div id="sidebarDiv" class="sidebar responsive ace-save-state"></div>
+	  <div class="main-content">
+			<!--嵌入面包屑-->
+			<div class="breadcrumbs ace-save-state" id="breadcrumbs"></div>
+			<!--侧边栏对应内容-->
+			<div class="tab-content">
+				  <!--项目管理-->
+				  <div class="tab-pane active" id="projectManagementDiv"></div>
+				  <!--主功能区-->
+				  <div class="tab-pane" id="mainFunctionDiv"></div>
+				  <!--word编辑区-->
+				  <div class="tab-pane" id="wordEditDiv"></div>
+				  <!--帮助页面-->
+				  <div class="tab-pane" id="helpDiv"></div>
+			</div>
+	  </div>
+	  <!--footer-->
+	  <div class="footer" id="copyRightDiv"></div>
+</div>
+<!--模态框-->
+<div id="modalFrameDiv"></div>
+<script type="text/javascript" src="./js/buttonAction.js"></script>
+<script type="text/javascript" src="./js/resultReport.js"></script>
+</body>
+</html>

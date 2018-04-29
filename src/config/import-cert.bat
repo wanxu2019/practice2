@@ -1,0 +1,2 @@
+del "%JAVA_HOME%\jre\lib\security\cacerts"
+keytool -import -alias xjtucadcam -file xjtucadcam.cer -noprompt -trustcacerts -storetype jks -keystore "%JAVA_HOME%\jre\lib\security\cacerts" -storepass xjtucadcam

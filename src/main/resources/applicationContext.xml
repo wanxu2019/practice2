@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Activates scanning of @Service -->
+	<context:component-scan base-package="xjtu.service" />
+	<!-- Activates scanning of @Repository -->
+	<context:component-scan base-package="xjtu.dao" />
+
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+	<!-- dataSource -->
+	<!-- <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="java:comp/env/jdbc/TestDB"></property>
+	</bean> -->
+
+    <!--数据库1的配置-->
+	<bean id="mysql1DataSource" class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="${jdbc1.driverClassName}"/>
+	    <property name="url" value="${jdbc1.url}"/>
+	    <property name="username" value="${jdbc1.username}"/>
+	    <property name="password" value="${jdbc1.password}"/>
+	</bean>
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="mysql1DataSource"/>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<!--
+				<prop key="hibernate.show_sql">true</prop>
+				 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<!--
+				<prop key="hibernate.hbm2ddl.import_files">
+					/sql/myUser.sql,
+					/sql/expoorder.sql,
+					/sql/product.sql
+				</prop>
+				 -->
+				<!-- 解决 Spring-Security: No Session found for current thread 
+				<prop key="current_session_context_class">thread</prop>
+				-->
+				<!-- 插入数据后select lastInsert() -->
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>  
+			</props>
+		</property>
+		<property name="packagesToScan" value="xjtu.model" />
+	</bean>
+
+    <!--TransactionManager的配置，多个数据库的TransactionManager实现待考虑-->
+	<!-- Enable @Transactional support -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager"
+          p:sessionFactory-ref="sessionFactory">
+    </bean>
+
+
+    <bean id="sipocRecordDao" class="xjtu.dao.SIPOCRecordDao"/>
+    <bean id="sipocRecordService" class="xjtu.service.SIPOCRecordService"/>
+
+	<tx:annotation-driven />
+</beans>
