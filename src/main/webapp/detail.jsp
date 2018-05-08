@@ -384,21 +384,44 @@
 <div id="helpHtml">
 	  <div class="page-header">
 			<h1>
-				  **App使用说明
+				  SIPOC App使用说明
 			</h1>
 	  </div>
 	  <div class="alert alert-block alert-success" id="appHelp">
 			<div class="helpClass">
 				  <p class="helpP">
 						<i class="ace-icon fa fa-check green"></i>
-						欢迎使用<strong class="green">App</strong>, 使用流程如下：<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;1、首先*****<br>
-						截图<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;2、其次*****<br>
-						截图<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;3、最后*****<br>
-						截图<br>
-				  <p>
+						欢迎使用<strong class="green">SIPOC App</strong>,本应用为SIPOC图快速在线绘制工具，可供匿名用户和登陆用户使用，以下仅以登陆用户为例介绍应用的使用与功能，使用流程如下：<br>
+						<strong>1、用户登陆</strong><br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;输入应用地址打开应用页面后，如未使用过其他应用默认为匿名用户。点击页面右上角游客位置，呼出下拉框，点击登陆跳转至登陆页面，输入用户名和密码，点击登陆按钮即可完成登陆。<br>
+                </p>
+                      <div style="width:100%;text-align: center"><img src="static/img/help/1.png" style="width: 80%;"></div>
+                <p class="helpP">
+						<strong>2、项目管理与新建</strong><br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;本应用中将每个SIPOC图称为一个SIPOC项目，进行统一管理。登陆用户可以在页面左侧边栏上方看到绿色和蓝色的按钮，分别为项目管理按钮和项目新建按钮，点击项目管理功能按钮可跳转至项目管理页面，点击项目新建功能按钮可弹出新建项目弹出框。<br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;在项目管理页面可对已有项目进行查看和删除操作，用户也可在左侧边栏直接对项目进行查看和删除。在新建项目弹出框输入项目名和备注后再点击确认即可新建新项目。
+                      <br>
+                </p>
+                <div style="width:100%;text-align: center"><img src="static/img/help/2.png" style="width: 80%;"></div>
+                <p class="helpP">
+						<strong>3、项目编辑</strong><br>
+                          &nbsp;&nbsp;&nbsp;&nbsp;新建新项目后，用户可以选择新建好的项目进行编辑，例如此处选择“项目1”。用户可以直接在网页上对项目进行编辑。<br>
+                </p>
+                <div style="width:100%;text-align: center"><img src="static/img/help/3-1.png" style="width: 80%;"></div>
+                <p class="helpP">
+                          &nbsp;&nbsp;&nbsp;&nbsp;用户也可下载模板文件通过修改模板文件或者将当前SIPOC图项目导出并进行编辑然后上传完成对当前SIPOC图的修改和编辑。<br>
+                </p>
+                <div style="width:100%;text-align: center"><img src="static/img/help/3-2.png" style="width: 80%;"></div>
+                <p class="helpP">
+						<strong>4、数据保存</strong><br>
+                              &nbsp;&nbsp;&nbsp;&nbsp;在完成SIPOC图内容编辑以后用户可以选择将文件导出为excel文件或者图片。保存为excel文件的方法为点击工具条上的“文件导出”按钮，保存为图片的方法为点击工具条上的“预览图片”按钮，弹出预览图片，确认无误后点击保存图片按钮。导出文件和图片会保存在浏览器默认下载目录中。另外，登陆用户可以使用保存至云功能，将数据保存至数据库。<br>
+                </p>
+                <div style="width:100%;text-align: center"><img src="static/img/help/4.png" style="width: 80%;"></div>
+                <p class="helpP">
+						<strong>5、生成报告</strong><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;完成SIPOC图编辑后，用户还可以在本应用中快速生成报告，方法为选择“报告编辑”分页，然后进行修改，然后点击“保存Word”按钮即可。<br>
+                </p>
+                <div style="width:100%;text-align: center"><img src="static/img/help/5.png" style="width: 80%;"></div>
 			</div>
 	  </div>
 </div>
