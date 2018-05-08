@@ -4,9 +4,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,8 +12,8 @@ public class GenericDao<T> {
     public static final int DATABASE_MYSQL_1 = 1;
     public static final int DATABASE_MYSQL_2 = 2;
 
-    @Autowired
-    @Resource(name = "sessionFactory")
+//    @Autowired
+//    @Resource(name = "sessionFactory")
     private SessionFactory mysql1SessionFactory;
 
     //@Autowired
