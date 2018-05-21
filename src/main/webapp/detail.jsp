@@ -54,9 +54,6 @@
                 margin-left: auto;
                 margin-right: auto;
             }
-            .modal-dialog{
-                width:80%;
-            }
 
         </style>
 </head>
@@ -90,6 +87,9 @@
 						<a type="button" class="btn btn-info" id="btnDetailShow">
 							  <span class="glyphicon glyphicon-ok"></span>预览图片
 						</a>
+                      <a type="button" class="btn btn-info" id="saveAsProject" data-toggle="modal" data-target="#saveAsModal">
+                          <span class="menu-icon fa fa-folder"></span>另存为
+                      </a>
 						<a type="button" class="btn btn-info"  id="saveProject">
 							  <span class="glyphicon glyphicon-cloud"></span>保存至云
 						</a>
@@ -424,6 +424,38 @@
                 <div style="width:100%;text-align: center"><img src="static/img/help/5.png" style="width: 80%;"></div>
 			</div>
 	  </div>
+</div>
+<!--另存为模态框-->
+<div class="modal fade" id="saveAsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="newProjectModalTitle">
+                    新建项目
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!-- <%--输入框组--%> -->
+                <div class="input-group">
+                    <span class="input-group-addon">项目名：</span>
+                    <input type="text" class="form-control" placeholder="请输入项目名称" id="saveAsProjectNameModal">
+                </div>
+                <br>
+                <div class="input-group">
+                    <span class="input-group-addon">备 注：</span>
+                    <input type="text" class="form-control" placeholder="请输入备注" id="saveAsProjectRemarkModal">
+                </div>
+                <br>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="saveAsProject()" id="saveAsProButton">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="./static/js/draw.js"></script>
