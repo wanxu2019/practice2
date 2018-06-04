@@ -102,7 +102,7 @@
                         <div id="home" class="tab-pane active">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <div id="dataTableWrapper" class="table-responsive">
-                                    <input id="name" style="text-align:center;width:100%;height:30px;" value="record.name"/>
+                                    <input id="name" style="text-align:center;width:100%;height:30px;display: none;" value="record.name"/>
                                     <table id="dataTable"
                                            class="table table-striped table-bordered table-hover">
                                         <input id="recordId" value="record.id" style="display:none"/>
@@ -135,8 +135,7 @@
                                                         <li>
 
                                                             <input id="input_s_0"
-                                                                   value="value_1" />
-                                                            &nbsp;
+                                                                   value="value_1" class="sipoc_content" placeholder="内容<=8个汉字"/>
                                                             <button class="btn btn-danger btn-xs pull-right"
                                                                     onclick="javascript:delElement(this);">
                                                                 <i class="ace-icon fa fa-reply icon-only"> <i
@@ -154,8 +153,7 @@
                                                     <li>
 
                                                         <input id="input_i_0"
-                                                               value="value_1" />
-                                                        &nbsp;
+                                                               value="value_1" class="sipoc_content" placeholder="内容<=8个汉字"/>
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -172,8 +170,7 @@
                                                     <li>
 
                                                         <input id="input_p_0"
-                                                               value="value_1" />
-                                                        &nbsp;
+                                                               value="value_1" class="sipoc_content" placeholder="内容<=8个汉字" />
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -190,8 +187,7 @@
                                                     <li>
 
                                                         <input id="input_o_0"
-                                                               value="value_1" />
-                                                        &nbsp;
+                                                               value="value_1" class="sipoc_content"  placeholder="内容<=8个汉字"/>
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -208,8 +204,7 @@
                                                     <li>
 
                                                         <input id="sipoc_input_c_0"
-                                                               value="value_1" />
-                                                        &nbsp;
+                                                               value="value_1"  class="sipoc_content" placeholder="内容<=8个汉字"/>
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -364,7 +359,8 @@
 <%--打印表格--%>
 
                                 <div id="print" style="width:100%;text-align: center;">
-                                    <canvas id="canvas" width="1000px" height="1000px"></canvas>
+                                    <canvas id="canvas" width="1000px" height="1000px" style="display: none"></canvas>
+                                    <img id="canvasImg"/>
                                 </div>
 <%--打印表格End--%>
                             </div>

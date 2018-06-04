@@ -293,7 +293,8 @@ function displaySIPOCMessages(sipocMessages){
 
 //获取页面中编辑好的SIPOC信息
 function getSIPOCMessages() {
-    var name = $("#name").val();
+    //var name = $("#name").val().trim();
+    var name = projectName;
     var sMessages = [];
     var iMessages = [];
     var pMessages = [];
@@ -301,35 +302,35 @@ function getSIPOCMessages() {
     var cMessages = [];
     var sMessageSize = $("#sipoc_table td:nth-child(1) ul li input").length;
     for (var i = 0; i < sMessageSize; i++) {
-        var value=$("#input_s_" + i).val();
+        var value=$("#input_s_" + i).val().trim();
         if (value!= "") {
             sMessages.push(value);
         }
     }
     var iMessageSize = $("#sipoc_table td:nth-child(2) ul li input").length;
     for (i = 0; i < iMessageSize; i++) {
-        value=$("#input_i_" + i).val();
+        value=$("#input_i_" + i).val().trim();
         if (value!= "") {
             iMessages.push(value);
         }
     }
     var pMessageSize = $("#sipoc_table td:nth-child(3) ul li input").length;
     for (i = 0; i < pMessageSize; i++) {
-        value=$("#input_p_" + i).val();
+        value=$("#input_p_" + i).val().trim();
         if (value!= "") {
             pMessages.push(value);
         }
     }
     var oMessageSize = $("#sipoc_table td:nth-child(4) ul li input").length;
     for (i = 0; i < oMessageSize; i++) {
-        value=$("#input_o_" + i).val();
+        value=$("#input_o_" + i).val().trim();
         if (value!= "") {
             oMessages.push(value);
         }
     }
     var cMessageSize = $("#sipoc_table td:nth-child(5) ul li input").length;
     for (var i = 0; i < cMessageSize; i++) {
-        value=$("#sipoc_input_c_" + i).val();
+        value=$("#sipoc_input_c_" + i).val().trim();
         if (value!= "") {
             cMessages.push(value);
         }
@@ -356,7 +357,7 @@ function saveProjectToCustomBackend(){
     //保存到自己的数据库
     $.post("modify",
         {
-            id: $("#recordId").val(),
+            id: $("#recordId").val().trim(),
             name: name,
             sMessage: sipocMessages.sMessage,
             iMessage: sipocMessages.iMessage,
@@ -453,9 +454,9 @@ function saveAsProject() {
             success: function (result) {
                 if (result.state) {
                     $('.selectList').prepend('<li class="">\n' +
-                    '\t\t\t\t\t<a onclick="sideCheck(' + result.content.id + ',this)">\n' +
+                    '\t\t\t\t\t<a>\n' +
                     '\t\t\t\t\t\t<div>\n' +
-                    '\t\t\t\t\t\t\t<div class="sideProjectLi" onmouseover="this.title = this.innerHTML;">\n' +
+                    '\t\t\t\t\t\t\t<div class="sideProjectLi" onmouseover="this.title = this.innerHTML;" onclick="sideCheck(' + result.content.id + ',this)">\n' +
                     '\t\t\t\t\t\t\t\t' + result.content.projectName + '\n' +
                     '\t\t\t\t\t\t\t</div>\n' +
                     '\t\t\t\t\t\t\t<div style="position:absolute;bottom:6px;right:5px;">\n' +
@@ -488,12 +489,14 @@ function saveAsProject() {
 }
 function addS() {
     var size = $("#sipoc_table td:nth-child(1) ul li").length;
-    $("#sipoc_table td:nth-child(1) ul").append("<li><input id=\"input_s_" + size + "\"/>&nbsp;&nbsp;&nbsp;<button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(1) ul").append("<li><input id=\"input_s_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addI() {
     var size = $("#sipoc_table td:nth-child(2) ul li").length;
-    $("#sipoc_table td:nth-child(2) ul").append("<li><input id=\"input_i_" + size + "\"/>&nbsp;&nbsp;&nbsp;<button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(2) ul").append("<li><input id=\"input_i_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addP() {
@@ -503,17 +506,20 @@ function addP() {
         alert("最多添加8项流程，请精简流程。");
         return -1;
     }
-    $("#sipoc_table td:nth-child(3) ul").append("<li><input id=\"input_p_" + size + "\"/>&nbsp;&nbsp;&nbsp;<button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(3) ul").append("<li><input id=\"input_p_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addO() {
     var size = $("#sipoc_table td:nth-child(4) ul li").length;
-    $("#sipoc_table td:nth-child(4) ul").append("<li><input id=\"input_o_" + size + "\"/>&nbsp;&nbsp;&nbsp;<button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(4) ul").append("<li><input id=\"input_o_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addC() {
     var size = $("#sipoc_table td:nth-child(5) ul li").length;
-    $("#sipoc_table td:nth-child(5) ul").append("<li><input id=\"sipoc_input_c_" + size + "\"/>&nbsp;&nbsp;&nbsp;<button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(5) ul").append("<li><input id=\"sipoc_input_c_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 //删除单个元素
@@ -536,7 +542,7 @@ function saveToFile() {
     //S数据
     var size = $("#sipoc_table td:nth-child(1) ul li").length;
     for(var i=0;i<size;i++){
-        var value=$("#sipoc_table td:nth-child(1) ul li:nth-child("+(i+1)+") input").val();
+        var value=$("#sipoc_table td:nth-child(1) ul li:nth-child("+(i+1)+") input").val().trim();
         if(value!=undefined&&value!=""){
             sMessages=sMessages.concat(value);
         }
@@ -544,7 +550,7 @@ function saveToFile() {
     //I数据
     size = $("#sipoc_table td:nth-child(2) ul li").length;
     for(var i=0;i<size;i++){
-        var value=$("#sipoc_table td:nth-child(2) ul li:nth-child("+(i+1)+") input").val();
+        var value=$("#sipoc_table td:nth-child(2) ul li:nth-child("+(i+1)+") input").val().trim();
         if(value!=undefined&&value!=""){
             iMessages=iMessages.concat(value);
         }
@@ -552,7 +558,7 @@ function saveToFile() {
     //P数据
     size = $("#sipoc_table td:nth-child(3) ul li").length;
     for(var i=0;i<size;i++){
-        var value=$("#sipoc_table td:nth-child(3) ul li:nth-child("+(i+1)+") input").val();
+        var value=$("#sipoc_table td:nth-child(3) ul li:nth-child("+(i+1)+") input").val().trim();
         if(value!=undefined&&value!=""){
             pMessages=pMessages.concat(value);
         }
@@ -560,7 +566,7 @@ function saveToFile() {
     //O数据
     size = $("#sipoc_table td:nth-child(4) ul li").length;
     for(var i=0;i<size;i++){
-        var value=$("#sipoc_table td:nth-child(4) ul li:nth-child("+(i+1)+") input").val();
+        var value=$("#sipoc_table td:nth-child(4) ul li:nth-child("+(i+1)+") input").val().trim();
         if(value!=undefined&&value!=""){
             oMessages=oMessages.concat(value);
         }
@@ -568,7 +574,7 @@ function saveToFile() {
     //C数据
     size = $("#sipoc_table td:nth-child(5) ul li").length;
     for(var i=0;i<size;i++){
-        var value=$("#sipoc_table td:nth-child(5) ul li:nth-child("+(i+1)+") input").val();
+        var value=$("#sipoc_table td:nth-child(5) ul li:nth-child("+(i+1)+") input").val().trim();
         if(value!=undefined&&value!=""){
             cMessages=cMessages.concat(value);
         }
@@ -609,7 +615,7 @@ function saveToFile() {
             $("#exportTable tbody tr:nth-child("+(i+1)+")").append("<td>"+""+"</td>");
         }
     }
-    doit("xlsx","data.xlsx");
+    doit("xlsx","data"+"_"+getTimeNow()+".xlsx");
 }
 //写入excel操作
 function s2ab(s) {
@@ -628,7 +634,7 @@ function s2ab(s) {
 function export_table_to_excel(id, type, fn) {
     var wb = XLSX.utils.table_to_book(document.getElementById(id), {sheet:"Sheet JS"});
     var wbout = XLSX.write(wb, {bookType:type, bookSST:true, type: 'binary'});
-    var fname = fn || 'test.' + type;
+    var fname = fn ||('test.'+type);
     try {
         saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), fname);
     } catch(e) { if(typeof console != 'undefined') console.log(e, wbout); }
@@ -638,11 +644,39 @@ function export_table_to_excel(id, type, fn) {
 function doit(type, fn) {
     return export_table_to_excel('exportTable', type || 'xlsx', fn);
 }
+// 对Date的扩展，将 Date 转化为指定格式的String
+// 月(M)、日(d)、小时(h)、分(m)、秒(s)、季度(q) 可以用 1-2 个占位符，
+// 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
+// 例子：
+// (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
+// (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+Date.prototype.Format = function (fmt) { //author: meizz
+    var o = {
+        "M+": this.getMonth() + 1, //月份
+        "d+": this.getDate(), //日
+        "h+": this.getHours(), //小时
+        "m+": this.getMinutes(), //分
+        "s+": this.getSeconds(), //秒
+        "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+        "S": this.getMilliseconds() //毫秒
+    };
+    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+    return fmt;
+}
+function getTimeNow(){
+    return new Date().Format("yyyy-MM-dd hh-mm-ss");
+}
 //保存为图片
 function saveAsPicture(){
+    $("#canvas").css("display","");
+    $("#canvasImg").css("display","none");
     domtoimage.toBlob(document.getElementById('print'), { bgcolor: "#ffffff" })
         .then(function (blob) {
-            window.saveAs(blob, $("#name").val()+'.png');
+            window.saveAs(blob, $("#name").val().trim()+"_"+getTimeNow()+'.png');
+            $("#canvasImg").css("display","");
+            $("#canvas").css("display","none");
         });
 }
 function detailShow(){
@@ -655,7 +689,7 @@ function detailShow(){
 	    //S数据
 	    var size = $("#sipoc_table td:nth-child(1) ul li").length;
 	    for(var i=0;i<size;i++){
-	        var value=$("#sipoc_table td:nth-child(1) ul li:nth-child("+(i+1)+") input").val();
+	        var value=$("#sipoc_table td:nth-child(1) ul li:nth-child("+(i+1)+") input").val().trim();
 	        if(value!=undefined&&value!=""){
 	            sMessages=sMessages.concat(value);
 	        }
@@ -663,7 +697,7 @@ function detailShow(){
 	    //I数据
 	    size = $("#sipoc_table td:nth-child(2) ul li").length;
 	    for(var i=0;i<size;i++){
-	        var value=$("#sipoc_table td:nth-child(2) ul li:nth-child("+(i+1)+") input").val();
+	        var value=$("#sipoc_table td:nth-child(2) ul li:nth-child("+(i+1)+") input").val().trim();
 	        if(value!=undefined&&value!=""){
 	            iMessages=iMessages.concat(value);
 	        }
@@ -671,7 +705,7 @@ function detailShow(){
 	    //P数据
 	    size = $("#sipoc_table td:nth-child(3) ul li").length;
 	    for(var i=0;i<size;i++){
-	        var value=$("#sipoc_table td:nth-child(3) ul li:nth-child("+(i+1)+") input").val();
+	        var value=$("#sipoc_table td:nth-child(3) ul li:nth-child("+(i+1)+") input").val().trim();
 	        if(value!=undefined&&value!=""){
 	            pMessages=pMessages.concat(value);
 	        }
@@ -679,7 +713,7 @@ function detailShow(){
 	    //O数据
 	    size = $("#sipoc_table td:nth-child(4) ul li").length;
 	    for(var i=0;i<size;i++){
-	        var value=$("#sipoc_table td:nth-child(4) ul li:nth-child("+(i+1)+") input").val();
+	        var value=$("#sipoc_table td:nth-child(4) ul li:nth-child("+(i+1)+") input").val().trim();
 	        if(value!=undefined&&value!=""){
 	            oMessages=oMessages.concat(value);
 	        }
@@ -687,14 +721,14 @@ function detailShow(){
 	    //C数据
 	    size = $("#sipoc_table td:nth-child(5) ul li").length;
 	    for(var i=0;i<size;i++){
-	        var value=$("#sipoc_table td:nth-child(5) ul li:nth-child("+(i+1)+") input").val();
+	        var value=$("#sipoc_table td:nth-child(5) ul li:nth-child("+(i+1)+") input").val().trim();
 	        if(value!=undefined&&value!=""){
 	            cMessages=cMessages.concat(value);
 	        }
 	    }
     //填充数据到新的展示页
         //表名
-	    $("#detailShowName").append("<h4 style=\"text-align: center;\">"+$("#name").val()+"</h4>");
+	    $("#detailShowName").append("<h4 style=\"text-align: center;\">"+$("#name").val().trim()+"</h4>");
         //表头
 	    $("#showS").append("<a href=\"#\" class=\"list-group-item active\"><h4 class=\"list-group-item-heading\">供方</h4></a>");
 	    $("#showI").append("<a href=\"#\" class=\"list-group-item active\"><h4 class=\"list-group-item-heading\">输入</h4></a>");
@@ -732,7 +766,7 @@ function detailShow(){
 	    	
 	    	
 		}
-    var recordName=$("#name").val();
+    var recordName=$("#name").val().trim();
     drawSIPOC();
 }
 function addPngToWord(){
@@ -755,7 +789,32 @@ function addPngToWord(){
             console.error('oops, something went wrong!', error);
         });
 }
-
+function isChinese(str){
+    if(/^[\u3220-\uFA29]+$/.test(str)){
+        return true;
+    }else{
+        return false;
+    }
+}
+function onContentChange(dom){
+    var content=$(dom).val().trim();
+    var allLength=0;
+    var limit_index=-1;
+    for(var i=0;i<content.length;i++){
+        var ch=content.substring(i,i+1);
+        if(isChinese(ch)){
+            allLength+=2;
+        }else{
+            allLength+=1;
+        }
+        if(allLength>16){
+            limit_index=i;
+            alert("输入内容长度不可超过16（中文占2字符），请重新输入");
+            $(dom).val(content.substring(0,limit_index));
+            break;
+        }
+    }
+}
 //初始加载函数
 $(function () {
     //alert("document ready!");
@@ -782,6 +841,11 @@ $(function () {
     }
     xlf.addEventListener('change', handleFile, false);
     //detailShow();
+    //模拟点击第一项
+    setTimeout(function(){
+        $($('div[onclick^="sideCheck("]')[0]).trigger("click");
+    },500);
+    $("input.sipoc_content").attr("onchange","onContentChange(this)");
 });
 
 

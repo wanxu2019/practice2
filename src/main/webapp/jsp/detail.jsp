@@ -136,7 +136,6 @@
 
                                                             <input id="input_s_0"
                                                                    value="value_1" />
-                                                            &nbsp;
                                                             <button class="btn btn-danger btn-xs pull-right"
                                                                     onclick="javascript:delElement(this);">
                                                                 <i class="ace-icon fa fa-reply icon-only"> <i
@@ -155,7 +154,6 @@
 
                                                         <input id="input_i_0"
                                                                value="value_1" />
-                                                        &nbsp;
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -173,7 +171,6 @@
 
                                                         <input id="input_p_0"
                                                                value="value_1" />
-                                                        &nbsp;
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -191,7 +188,6 @@
 
                                                         <input id="input_o_0"
                                                                value="value_1" />
-                                                        &nbsp;
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
@@ -209,7 +205,6 @@
 
                                                         <input id="sipoc_input_c_0"
                                                                value="value_1" />
-                                                        &nbsp;
                                                         <button class="btn btn-danger btn-xs pull-right"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i

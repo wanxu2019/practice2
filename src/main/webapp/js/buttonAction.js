@@ -10,7 +10,7 @@ function addSelfDefine(result) {
     /*
     * your code.....
     **/
-    $('a[onclick="sideCheck('+result.content.id+',this)"]').trigger("click");
+    $('div[onclick="sideCheck('+result.content.id+',this)"]').trigger("click");
     console.log("add project successful");
 }
 
@@ -26,6 +26,7 @@ function checkSelfDefine(node, result) {
     console.log("appResult:"+result.content.appResult);
     try{
         var sipocMessages=JSON.parse(result.content.appContent);
+        projectName=result.content.projectName;
         displaySIPOCMessages(sipocMessages);
     }catch(e){
         console.log(e);
@@ -40,7 +41,7 @@ function removeSelfDefine(result) {
     /*
     * your code.....
     **/
-    $($('a[onclick^="sideCheck("]')[0]).trigger("click");
+    $($('div[onclick^="sideCheck("]')[0]).trigger("click");
     console.log("remove project successful");
 }
 var customText = {//word编辑区自定义文本内容

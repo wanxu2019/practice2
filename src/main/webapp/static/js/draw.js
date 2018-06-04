@@ -544,5 +544,11 @@ function drawSIPOC(){
         ,sipocMessages.oMessage
         ,sipocMessages.cMessage
     );
+    setTimeout(function(){
+        $("#canvasImg").attr("src",$("#canvas")[0].toDataURL("image/png"));
+        var containerWidth=parseInt($("#print").css("width").substring(0,$("#print").css("width").length-2));
+        containerWidth=min(containerWidth,1000);
+        $("#canvasImg").css("width",containerWidth*0.95);
+    },500);
 }
 testDraw();
