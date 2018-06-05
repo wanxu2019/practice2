@@ -1,5 +1,5 @@
 var projectId = 0;//项目Id
-var projectName;//项目名
+var projectName="未定义项目";//项目名
 var appResult = null;//word报告
 var appNameChinese = 'SIPOC';//app中文名（必填）
 var USER_NAME = '';//当前登录用户名
@@ -24,13 +24,19 @@ function checkSelfDefine(node, result) {
     initCustomText();
     console.log("appContent:"+result.content.appContent);
     console.log("appResult:"+result.content.appResult);
-    try{
-        var sipocMessages=JSON.parse(result.content.appContent);
-        projectName=result.content.projectName;
-        displaySIPOCMessages(sipocMessages);
+    projectName=result.content.projectName;
+    try {
+        var sipocMessages = JSON.parse(result.content.appContent);
+        if(sipocMessages!=undefined){
+            displaySIPOCMessages(sipocMessages);
+        }
     }catch(e){
-        console.log(e);
         removeAllData();
+        if(result.content.appContent!=""){
+            console.log("result.content.appContent="+result.content.appContent);
+        }else{
+            //result.content.appContent暂未保存有数据
+        }
     }
     console.log("check project successful");
 }

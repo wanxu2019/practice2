@@ -489,13 +489,13 @@ function saveAsProject() {
 }
 function addS() {
     var size = $("#sipoc_table td:nth-child(1) ul li").length;
-    $("#sipoc_table td:nth-child(1) ul").append("<li><input id=\"input_s_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(1) ul").append("<li><input id=\"input_s_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=15个汉字\"/><button class=\"btn btn-danger btn-xs pull-right btn-del-content\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
     $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addI() {
     var size = $("#sipoc_table td:nth-child(2) ul li").length;
-    $("#sipoc_table td:nth-child(2) ul").append("<li><input id=\"input_i_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(2) ul").append("<li><input id=\"input_i_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=15个汉字\"/><button class=\"btn btn-danger btn-xs pull-right btn-del-content\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
     $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
@@ -506,19 +506,19 @@ function addP() {
         alert("最多添加8项流程，请精简流程。");
         return -1;
     }
-    $("#sipoc_table td:nth-child(3) ul").append("<li><input id=\"input_p_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(3) ul").append("<li><input id=\"input_p_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=15个汉字\"/><button class=\"btn btn-danger btn-xs pull-right btn-del-content\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
     $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addO() {
     var size = $("#sipoc_table td:nth-child(4) ul li").length;
-    $("#sipoc_table td:nth-child(4) ul").append("<li><input id=\"input_o_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(4) ul").append("<li><input id=\"input_o_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=15个汉字\"/><button class=\"btn btn-danger btn-xs pull-right btn-del-content\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
     $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
 function addC() {
     var size = $("#sipoc_table td:nth-child(5) ul li").length;
-    $("#sipoc_table td:nth-child(5) ul").append("<li><input id=\"sipoc_input_c_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=8个汉字\"/><button class=\"btn btn-danger btn-xs pull-right\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
+    $("#sipoc_table td:nth-child(5) ul").append("<li><input id=\"sipoc_input_c_" + size + "\"  class=\"sipoc_content\" placeholder=\"内容<=15个汉字\"/><button class=\"btn btn-danger btn-xs pull-right btn-del-content\" onclick=\"javascript:delElement(this);\"><i class=\"ace-icon fa fa-reply icon-only\"><i class=\"icon-trash icon-white\"></i></i></button></li>");
     $("input.sipoc_content").attr("onchange","onContentChange(this)");
     return size;
 }
@@ -797,6 +797,8 @@ function isChinese(str){
     }
 }
 function onContentChange(dom){
+    //最大字符长度
+    var MAX_LENGTH=30;
     var content=$(dom).val().trim();
     var allLength=0;
     var limit_index=-1;
@@ -807,9 +809,9 @@ function onContentChange(dom){
         }else{
             allLength+=1;
         }
-        if(allLength>16){
+        if(allLength>MAX_LENGTH){
             limit_index=i;
-            alert("输入内容长度不可超过16（中文占2字符），请重新输入");
+            alert("输入内容长度不可超过"+MAX_LENGTH+"（中文占2字符），请重新输入");
             $(dom).val(content.substring(0,limit_index));
             break;
         }

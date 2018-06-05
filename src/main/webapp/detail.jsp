@@ -55,6 +55,9 @@
                 margin-right: auto;
             }
 
+            .btn-del-content{
+                max-width:25%;
+            }
         </style>
 </head>
 <body class="no-skin">
@@ -135,9 +138,9 @@
                                                         <li>
 
                                                             <input id="input_s_0"
-                                                                   value="value_1" class="sipoc_content" placeholder="内容<=8个汉字"/>
-                                                            <button class="btn btn-danger btn-xs pull-right"
-                                                                    onclick="javascript:delElement(this);">
+                                                                   value="value_1" class="sipoc_content" placeholder="内容<=15个汉字"/>
+                                                            <button class="btn btn-danger btn-xs pull-right btn-del-content"
+                                                                    onclick="javascript:delElement(this);" >
                                                                 <i class="ace-icon fa fa-reply icon-only"> <i
                                                                         class="icon-trash icon-white"></i></i>
                                                             </button>
@@ -153,8 +156,8 @@
                                                     <li>
 
                                                         <input id="input_i_0"
-                                                               value="value_1" class="sipoc_content" placeholder="内容<=8个汉字"/>
-                                                        <button class="btn btn-danger btn-xs pull-right"
+                                                               value="value_1" class="sipoc_content" placeholder="内容<=15个汉字"/>
+                                                        <button class="btn btn-danger btn-xs pull-right btn-del-content"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
                                                                     class="icon-trash icon-white"></i></i>
@@ -170,8 +173,8 @@
                                                     <li>
 
                                                         <input id="input_p_0"
-                                                               value="value_1" class="sipoc_content" placeholder="内容<=8个汉字" />
-                                                        <button class="btn btn-danger btn-xs pull-right"
+                                                               value="value_1" class="sipoc_content" placeholder="内容<=15个汉字" />
+                                                        <button class="btn btn-danger btn-xs pull-right btn-del-content"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
                                                                     class="icon-trash icon-white"></i></i>
@@ -187,8 +190,8 @@
                                                     <li>
 
                                                         <input id="input_o_0"
-                                                               value="value_1" class="sipoc_content"  placeholder="内容<=8个汉字"/>
-                                                        <button class="btn btn-danger btn-xs pull-right"
+                                                               value="value_1" class="sipoc_content"  placeholder="内容<=15个汉字"/>
+                                                        <button class="btn btn-danger btn-xs pull-right btn-del-content"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
                                                                     class="icon-trash icon-white"></i></i>
@@ -204,8 +207,8 @@
                                                     <li>
 
                                                         <input id="sipoc_input_c_0"
-                                                               value="value_1"  class="sipoc_content" placeholder="内容<=8个汉字"/>
-                                                        <button class="btn btn-danger btn-xs pull-right"
+                                                               value="value_1"  class="sipoc_content" placeholder="内容<=15个汉字"/>
+                                                        <button class="btn btn-danger btn-xs pull-right btn-del-content"
                                                                 onclick="javascript:delElement(this);">
                                                             <i class="ace-icon fa fa-reply icon-only"> <i
                                                                     class="icon-trash icon-white"></i></i>

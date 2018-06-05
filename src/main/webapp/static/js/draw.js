@@ -1,6 +1,8 @@
 /**
  * Created by Administrator on 2018/4/10.
  */
+//一行文本的高度
+var global_text_height = 20;
 function max(x1,x2){
     return x1>x2?x1:x2;
 }
@@ -31,20 +33,75 @@ function drawCircle(x,y,r,color){
     context.fill();
     context.closePath();
 }
+function isChinese(str){
+    if(/^[\u3220-\uFA29]+$/.test(str)){
+        return true;
+    }else{
+        return false;
+    }
+}
+//计算文本长度
+function getTextLength(text){
+    var allLength=0;
+    for(var i=0;i<text.length;i++) {
+        var ch = text.substring(i, i + 1);
+        if (isChinese(ch)) {
+            allLength += 2;
+        } else {
+            allLength += 1;
+        }
+    }
+    return allLength;
+}
+//根据指定长度获取对应下标
+function getIndexByLength(text,length){
+    var allLength=0;
+    for(var i=0;i<text.length;i++) {
+        var ch = text.substring(i, i + 1);
+        if (isChinese(ch)) {
+            allLength += 2;
+        } else {
+            allLength += 1;
+        }
+        if(allLength>length){
+            return i;
+        }
+    }
+    return allLength;
+}
 //画带文字的矩形框
 function strokeRectWithText(start_x,start_y,width,height,line_color,line_width,text,text_color,font){
     var context=getCanvasContext();
-    //画矩形
+    var textLength=getTextLength(text);
+    var text_width = context.measureText(text).width;
     context.lineWidth=line_width;
     context.strokeStyle = line_color;
-    context.strokeRect(start_x, start_y, width, height);
-    //画文字
-    context.font=font;
-    var txt_width = context.measureText(text).width;
-    context.fillStyle=text_color;
-    context.textBaseline="middle";
-    context.textAlign="center";
-    context.fillText(text,start_x+width/2, start_y+height/2);
+    context.font = font;
+    context.fillStyle = text_color;
+    context.textBaseline = "middle";
+    context.textAlign = "center";
+    if(textLength<16) {
+        //单行绘制即可
+        //画矩形
+        context.strokeRect(start_x, start_y, width, height);
+        //画文字
+        context.fillText(text, start_x + width / 2, start_y + height / 2);
+        return start_y+height;
+    }else{
+        //绘制两行文字
+        var middle_index=getIndexByLength(text,15);
+        var text_part_1=text.substring(0,middle_index);
+        var text_part_2=text.substring(middle_index);
+        //画矩形
+        context.strokeRect(start_x, start_y, width, height+global_text_height);
+        //画文字
+        height+=global_text_height;
+        //第一行
+        context.fillText(text_part_1, start_x + width / 2, start_y + height / 2-global_text_height/2);
+        //第二行
+        context.fillText(text_part_2, start_x + width / 2, start_y + height / 2+global_text_height/2);
+        return start_y+height;
+    }
 }
 //画表名
 function drawRecordName(recordName){
@@ -63,13 +120,12 @@ function drawSeries(base_x,base_y,width,each_height,series_name,series_data){
     var start_x=base_x;
     var start_y=base_y;
     //画表头
-    strokeRectWithText(start_x,start_y,width,each_height,"black",2,series_name,"black","bold 20px 微软雅黑");
+    start_y=strokeRectWithText(start_x,start_y,width,each_height,"black",2,series_name,"black","bold 20px 微软雅黑");
     //画数据
     for(var i=0;i<series_data.length;i++){
-    start_y+=each_height;
-    strokeRectWithText(start_x,start_y,width,each_height,"black",2,series_data[i],"black","18px 微软雅黑");
+    start_y=strokeRectWithText(start_x,start_y,width,each_height,"black",2,series_data[i],"black","18px 微软雅黑");
     }
-    return start_y+each_height;
+    return start_y;
 }
 var process_img=new Image();
 process_img.src="./static/js/process.png";
@@ -264,8 +320,14 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
         //Rebase将基准点定位到左边
         var l=min(4,pMessages.length);
         fragments_base_x=fragments_base_x-(l*fragment_width+fragment_arrow_width*(l-1))/2;
+        var bias_text_height;
+        if(getTextLength(pMessages[0])<=15){
+            bias_text_height=global_text_height/2;
+        }else{
+            bias_text_height=0;
+        }
         //先画第一个Fragment
-        strokeRectWithText(fragments_base_x,fragments_base_y+y_bias,fragment_width,fragment_height,fragment_line_color,fragment_line_width,pMessages[0],"black","bold 20px 微软雅黑");
+        strokeRectWithText(fragments_base_x,fragments_base_y+y_bias+bias_text_height,fragment_width,fragment_height,fragment_line_color,fragment_line_width,pMessages[0],"black","bold 20px 微软雅黑");
         //再画箭头与2-4个
         for(var i=1;i<pMessages.length&&i<4;i++){
             //画箭头
@@ -283,16 +345,21 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
             //改为画简单的箭头
             drawSimpleRightArrow(
                 fragments_base_x+fragment_width+(i-1)*(fragment_width+fragment_arrow_width)+fragment_arrow_width/6
-                ,fragments_base_y+fragment_height/2+y_bias
+                ,fragments_base_y+fragment_height/2+y_bias+global_text_height/2
                 ,fragment_arrow_width/3*2
                 ,8
                 ,8
                 ,3
                 ,"#000000"
             );
+            if(getTextLength(pMessages[i])<=15){
+                bias_text_height=global_text_height/2;
+            }else{
+                bias_text_height=0;
+            }
             strokeRectWithText(
                 fragments_base_x+i*(fragment_width+fragment_arrow_width)
-                ,fragments_base_y+y_bias
+                ,fragments_base_y+y_bias+bias_text_height
                 ,fragment_width
                 ,fragment_height
                 ,fragment_line_color
@@ -304,7 +371,7 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
         }
         if(pMessages.length<5)
         {
-            return fragments_base_y+y_bias+fragment_height;
+            return fragments_base_y+y_bias+fragment_height+global_text_height;
         }
         else{
             //两层Fragments的层间间隔
@@ -324,7 +391,7 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
             //画简单的向下的箭头
             drawSimpleDownwardTurnArrow(
                 fragments_base_x+3*fragment_arrow_width+3.5*fragment_width
-                ,fragments_base_y+fragment_height+2*y_bias
+                ,fragments_base_y+fragment_height+2*y_bias+global_text_height
                 ,fragments_vertical_interval/2.5
                 ,(fragment_width+fragment_arrow_width)*3
                 ,fragments_vertical_interval/2.5
@@ -334,9 +401,14 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
                 ,"#000000"
             );
             //Rebase将基准点定位到左边
-            fragments_base_y+=fragment_height+fragments_vertical_interval+y_bias;
+            fragments_base_y+=fragment_height+fragments_vertical_interval+y_bias+global_text_height;
             //先画第一个Fragment
-            strokeRectWithText(fragments_base_x,fragments_base_y,fragment_width,fragment_height,fragment_line_color,fragment_line_width,pMessages[4],"black","bold 20px 微软雅黑");
+            if(getTextLength(pMessages[4])<=15){
+                bias_text_height=global_text_height/2;
+            }else{
+                bias_text_height=0;
+            }
+            strokeRectWithText(fragments_base_x,fragments_base_y+bias_text_height,fragment_width,fragment_height,fragment_line_color,fragment_line_width,pMessages[4],"black","bold 20px 微软雅黑");
             //再画箭头与6-8个
             for(var i=5;i<pMessages.length;i++){
                 //画箭头
@@ -361,9 +433,14 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
                     ,3
                     ,"#000000"
                 );
+                if(getTextLength(pMessages[i])<=15){
+                    bias_text_height=global_text_height/2;
+                }else{
+                    bias_text_height=0;
+                }
                 strokeRectWithText(
                     fragments_base_x+(i-4)*(fragment_width+fragment_arrow_width)
-                    ,fragments_base_y
+                    ,fragments_base_y+bias_text_height
                     ,fragment_width
                     ,fragment_height
                     ,fragment_line_color
@@ -373,7 +450,7 @@ function drawFragments(fragments_base_x,fragments_base_y,pMessages,fragment_widt
                     ,"bold 20px 微软雅黑"
                 );
             }
-            return fragments_base_y+fragment_height;
+            return fragments_base_y+fragment_height+global_text_height;
         }
     }
 }
